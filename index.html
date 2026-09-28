@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Confeitaria ChoCoffee Paixão | Gestão & Precificação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cacau: '#26150B',    // Cacau Profundo (Texto principal, cabeçalhos de destaque)
+              cafe: '#403022',     // Café Torrado (Cabeçalhos de tabelas, botões primários)
+              marrom: '#735840',   // Marrom Médio (Bordas, ícones, destaques secundários)
+              taupe: '#A68D77',    // Taupe Elegante (Linhas de divisão, detalhes)
+              creme: '#DBDDD8',    // Creme (Fundo geral da página)
+              card: '#F8F9F7',     // Off-white suave para o interior dos cards
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: #DBDDD8; 
+      color: #26150B; 
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-brand { font-family: 'Playfair Display', serif; }
+
+    /* Custom touch scrollbar for mobile tables */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #DBDDD8;
+      border-radius: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #A68D77;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased">
+
+  <header class="bg-[#26150B] text-[#DBDDD8] shadow-md sticky top-0 z-50 border-b border-[#A68D77]/30">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+      
+      <!-- Logotipo e Nome Adaptados para Mobile -->
+      <div class="flex items-center space-x-2.5 w-full sm:w-auto justify-center sm:justify-start">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#A68D77] flex items-center justify-center bg-[#403022] shadow-inner flex-shrink-0">
+          <span class="font-brand text-[#DBDDD8] italic font-bold text-lg leading-none">CP</span>
+        </div>
+        <div class="text-center sm:text-left min-w-0">
+          <h1 class="font-brand text-base sm:text-lg md:text-xl font-bold tracking-wide text-[#FFFFFF] leading-tight truncate">
+            Confeitaria ChoCoffee Paixão
+          </h1>
+          <p class="text-[9px] sm:text-[10px] text-[#A68D77] font-semibold uppercase tracking-widest leading-none mt-0.5">
+            Gestão & Precificação
+          </p>
+        </div>
+      </div>
+
+      <!-- Navegação por Abas (Compacta no Mobile) -->
+      <nav class="flex items-center justify-center w-full sm:w-auto bg-[#403022] p-1 rounded-xl border border-[#A68D77]/40">
+        <button onclick="switchTab('pricing')" id="nav-pricing" class="flex-1 sm:flex-none px-3.5 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 bg-[#735840] text-[#FFFFFF] shadow-sm">
+          <i class="fa-solid fa-calculator mr-1.5"></i>Precificação
+        </button>
+        <button onclick="switchTab('stock')" id="nav-stock" class="flex-1 sm:flex-none px-3.5 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 text-[#DBDDD8] hover:text-[#FFFFFF]">
+          <i class="fa-solid fa-boxes-stacked mr-1.5"></i>Estoque
+        </button>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl mx-auto w-full p-3 sm:p-6 space-y-5 sm:space-y-8">
+
+    <!-- ABA 1: PRECIFICAÇÃO E FICHA TÉCNICA -->
+    <div id="tab-pricing" class="block space-y-5 sm:space-y-8">
+      
+      <!-- Topo da Aba -->
+      <div class="bg-[#F8F9F7] p-4 sm:p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border border-[#A68D77]/40">
+        <div>
+          <h2 class="font-brand text-xl sm:text-2xl font-bold text-[#26150B]">Ficha Técnica & Precificação</h2>
+          <p class="text-xs text-[#735840] mt-1 font-medium">Cadastre os custos dos insumos, veja o custo unitário e calcule seu preço de venda ideal.</p>
+        </div>
+        <button onclick="resetPricingData()" class="w-full sm:w-auto text-xs bg-[#403022] hover:bg-[#26150B] text-[#DBDDD8] px-3.5 py-2 rounded-xl transition font-bold border border-[#A68D77]/50 shadow-sm flex items-center justify-center">
+          <i class="fa-solid fa-rotate-left mr-1.5"></i>Restaurar Dados Padrão
+        </button>
+      </div>
+
+      <div class="bg-[#F8F9F7] rounded-2xl shadow-sm border border-[#A68D77]/40 overflow-hidden">
+        <div class="p-3.5 sm:p-4 bg-[#403022] text-[#FFFFFF] border-b border-[#A68D77]/40 flex items-center justify-between">
+          <h3 class="font-bold text-xs sm:text-sm flex items-center">
+            <i class="fa-solid fa-cart-shopping mr-2 text-[#A68D77]"></i> 1. Cadastro de Insumos
+          </h3>
+          <button onclick="addInsumoRow()" class="text-xs font-bold bg-[#735840] hover:bg-[#A68D77] text-[#FFFFFF] px-3 py-1.5 rounded-lg transition shadow-sm">
+            + Novo Insumo
+          </button>
+        </div>
+        
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left border-collapse min-w-[620px]">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] font-bold uppercase tracking-wider border-b border-[#A68D77]/40">
+                <th class="p-3">Insumo</th>
+                <th class="p-3 text-right">Preço de Compra</th>
+                <th class="p-3 text-right">Qtd Comprada</th>
+                <th class="p-3 text-center">Unidade</th>
+                <th class="p-3 text-right bg-[#403022] text-[#DBDDD8]">Custo Unitário</th>
+                <th class="p-3 text-center w-10"></th>
+              </tr>
+            </thead>
+            <tbody id="insumos-body" class="divide-y divide-[#DBDDD8] text-xs sm:text-sm bg-white">
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[10px] text-[#735840] p-2 text-center sm:hidden italic bg-[#DBDDD8]/40">
+          <i class="fa-solid fa-arrows-left-right mr-1"></i> Deslize a tabela para o lado se necessário
+        </p>
+      </div>
+
+      <div class="bg-[#F8F9F7] rounded-2xl shadow-sm border border-[#A68D77]/40 overflow-hidden">
+        <div class="p-3.5 sm:p-4 bg-[#403022] text-[#FFFFFF] border-b border-[#A68D77]/40 flex items-center justify-between">
+          <h3 class="font-bold text-xs sm:text-sm flex items-center">
+            <i class="fa-solid fa-utensils mr-2 text-[#A68D77]"></i> 2. Ficha Técnica (Receita de Brownie)
+          </h3>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left border-collapse min-w-[580px]">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] font-bold uppercase tracking-wider border-b border-[#A68D77]/40">
+                <th class="p-3">Ingrediente</th>
+                <th class="p-3 text-right">Qtd Utilizada</th>
+                <th class="p-3 text-center">Unidade</th>
+                <th class="p-3 text-right bg-[#403022] text-[#DBDDD8]">Custo na Receita</th>
+              </tr>
+            </thead>
+            <tbody id="recipe-body" class="divide-y divide-[#DBDDD8] text-xs sm:text-sm bg-white">
+            </tbody>
+            <tfoot class="bg-[#26150B] text-[#DBDDD8] font-bold border-t-2 border-[#A68D77]">
+              <tr>
+                <td colspan="3" class="p-3 text-right text-xs uppercase tracking-wider text-[#A68D77]">Custo Total da Receita</td>
+                <td id="recipe-total-cost" class="p-3 text-right text-white font-black text-sm sm:text-base">R$ 0,00</td>
+              </tr>
+              <tr class="bg-[#403022]">
+                <td colspan="3" class="p-3 text-right text-xs uppercase tracking-wider text-[#A68D77]">Rendimento Da Receita (Unidades)</td>
+                <td class="p-3 text-right">
+                  <input type="number" id="recipe-yield" value="12" oninput="calculateAll()" class="w-20 p-1 text-right bg-[#F8F9F7] text-[#26150B] border border-[#A68D77] rounded font-bold outline-none focus:ring-2 focus:ring-[#A68D77]">
+                </td>
+              </tr>
+              <tr class="bg-[#26150B] text-white">
+                <td colspan="3" class="p-3 text-right text-xs sm:text-sm font-bold uppercase tracking-wide text-[#A68D77]">Custo por Unidade (Brownie)</td>
+                <td id="cost-per-unit" class="p-3 text-right text-base sm:text-lg font-black text-[#DBDDD8]">R$ 0,00</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-[#F8F9F7] rounded-2xl shadow-sm border border-[#A68D77]/40 overflow-hidden">
+        <div class="p-3.5 sm:p-4 bg-[#403022] text-[#FFFFFF] border-b border-[#A68D77]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <h3 class="font-bold text-xs sm:text-sm flex items-center">
+            <i class="fa-solid fa-chart-line mr-2 text-[#A68D77]"></i> 3. Simulação de Preço de Venda
+          </h3>
+          <div class="text-xs font-bold text-[#DBDDD8] bg-[#26150B] px-3 py-1 rounded-lg border border-[#A68D77]/40 self-start sm:self-auto">
+            Custo Base Unitário: <span id="sim-cost-base" class="text-white font-extrabold">R$ 0,00</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left border-collapse min-w-[550px]">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] font-bold uppercase tracking-wider border-b border-[#A68D77]/40">
+                <th class="p-3">Método de Precificação</th>
+                <th class="p-3 text-center">Margem (%)</th>
+                <th class="p-3 text-right bg-[#403022] text-[#DBDDD8]">Preço Sugerido</th>
+                <th class="p-3 text-right bg-emerald-900 text-emerald-100">Lucro Bruto / Un</th>
+              </tr>
+            </thead>
+            <tbody id="sim-body" class="divide-y divide-[#DBDDD8] text-xs sm:text-sm bg-white font-medium">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ABA 2: CONTROLE DE ESTOQUE -->
+    <div id="tab-stock" class="hidden space-y-5 sm:space-y-8">
+      
+      <!-- Cabeçalho do Estoque -->
+      <div class="bg-[#F8F9F7] p-4 sm:p-6 rounded-2xl shadow-sm border border-[#A68D77]/40">
+        <h2 class="font-brand text-xl sm:text-2xl font-bold text-[#26150B]">Controle de Estoque Ativo</h2>
+        <p class="text-xs text-[#735840] mt-1 font-medium">
+          Clique ou toque diretamente no número para alterar a quantidade exata em estoque de forma rápida.
+        </p>
+      </div>
+
+      <!-- Cards de Métricas em Grade Responsiva -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        
+        <div class="bg-[#F8F9F7] p-4 rounded-2xl border border-[#A68D77]/40 shadow-sm flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-[#735840] uppercase tracking-wider">Insumos Cadastrados</span>
+          <span id="stock-total-items" class="text-2xl sm:text-3xl font-black text-[#26150B] mt-1">0</span>
+        </div>
+
+        <div class="bg-[#F8F9F7] p-4 rounded-2xl border border-[#A68D77]/40 shadow-sm flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-[#735840] uppercase tracking-wider">Alertas de Reposição Baixa</span>
+          <span id="stock-low-alerts" class="text-2xl sm:text-3xl font-black text-amber-800 mt-1">0</span>
+        </div>
+
+        <div class="bg-[#26150B] text-white p-4 rounded-2xl border border-[#A68D77]/40 shadow-sm flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-[#A68D77] uppercase tracking-wider">Brownies Prontos p/ Venda</span>
+          <div class="flex items-center justify-between mt-2">
+            <span id="ready-brownies-qty" class="text-2xl sm:text-3xl font-black text-[#DBDDD8]">0 un</span>
+            <div class="flex items-center space-x-1">
+              <button onclick="updateReadyBrownies(-1)" class="w-8 h-8 flex items-center justify-center bg-[#403022] hover:bg-[#735840] text-white rounded-lg font-bold text-sm transition border border-[#A68D77]/40 active:scale-95">-1</button>
+              <button onclick="updateReadyBrownies(1)" class="w-8 h-8 flex items-center justify-center bg-[#735840] hover:bg-[#A68D77] text-white rounded-lg font-bold text-sm transition border border-[#A68D77]/40 active:scale-95">+1</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bg-[#F8F9F7] rounded-2xl shadow-sm border border-[#A68D77]/40 overflow-hidden">
+        <div class="p-3.5 sm:p-4 bg-[#403022] text-[#FFFFFF] border-b border-[#A68D77]/40">
+          <h3 class="font-bold text-xs sm:text-sm flex items-center">
+            <i class="fa-solid fa-boxes-stacked mr-2 text-[#A68D77]"></i> Níveis de Insumos em Estoque
+          </h3>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left border-collapse min-w-[500px]">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] font-bold uppercase tracking-wider border-b border-[#A68D77]/40">
+                <th class="p-3">Insumo</th>
+                <th class="p-3 text-center">Qtd Atual em Estoque</th>
+                <th class="p-3 text-center">Unidade</th>
+                <th class="p-3 text-center">Status</th>
+                <th class="p-3 text-center">Ajuste Rápido</th>
+              </tr>
+            </thead>
+            <tbody id="stock-table-body" class="divide-y divide-[#DBDDD8] text-xs sm:text-sm bg-white">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Insumos Padrão do Sistema
+    const defaultInsumos = [
+      { name: 'Açúcar', price: 3.19, qty: 1000, unit: 'g', recipeQty: 340, stockCurrent: 2500 },
+      { name: 'Manteiga', price: 22.90, qty: 500, unit: 'g', recipeQty: 207, stockCurrent: 1000 },
+      { name: 'Ovos', price: 16.99, qty: 30, unit: 'un', recipeQty: 4, stockCurrent: 24 },
+      { name: 'Chocolate em Pó 50%', price: 69.90, qty: 1000, unit: 'g', recipeQty: 115, stockCurrent: 1500 },
+      { name: 'Chocolate Nobre', price: 89.90, qty: 1000, unit: 'g', recipeQty: 115, stockCurrent: 2000 },
+      { name: 'Farinha de Trigo', price: 4.65, qty: 1000, unit: 'g', recipeQty: 200, stockCurrent: 3000 },
+      { name: 'Embalagens', price: 7.80, qty: 100, unit: 'un', recipeQty: 12, stockCurrent: 150 }
+    ];
+
+    let insumos = JSON.parse(localStorage.getItem('chocoffee_insumos')) || defaultInsumos;
+    let readyBrownies = parseInt(localStorage.getItem('chocoffee_ready_qty')) || 24;
+
+    function switchTab(tab) {
+      const navPricing = document.getElementById('nav-pricing');
+      const navStock = document.getElementById('nav-stock');
+      const tabPricing = document.getElementById('tab-pricing');
+      const tabStock = document.getElementById('tab-stock');
+
+      if (tab === 'pricing') {
+        tabPricing.classList.remove('hidden');
+        tabStock.classList.add('hidden');
+        navPricing.className = 'flex-1 sm:flex-none px-3.5 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 bg-[#735840] text-[#FFFFFF] shadow-sm';
+        navStock.className = 'flex-1 sm:flex-none px-3.5 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 text-[#DBDDD8] hover:text-[#FFFFFF]';
+      } else {
+        tabPricing.classList.add('hidden');
+        tabStock.classList.remove('hidden');
+        navStock.className = 'flex-1 sm:flex-none px-3.5 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 bg-[#735840] text-[#FFFFFF] shadow-sm';
+        navPricing.className = 'flex-1 sm:flex-none px-3.5 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all duration-200 text-[#DBDDD8] hover:text-[#FFFFFF]';
+        renderStock();
+      }
+    }
+
+    function formatCurrency(val) {
+      return `R$ ${val.toFixed(2).replace('.', ',')}`;
+    }
+
+    function formatUnitCost(val) {
+      if (val === 0) return 'R$ 0,00';
+      if (val < 0.01) {
+        return `R$ ${val.toFixed(4).replace('.', ',')}`;
+      }
+      return `R$ ${val.toFixed(2).replace('.', ',')}`;
+    }
+
+    function renderInsumos() {
+      const tbody = document.getElementById('insumos-body');
+      tbody.innerHTML = '';
+
+      insumos.forEach((item, index) => {
+        const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
+        
+        tbody.innerHTML += `
+          <tr class="hover:bg-[#DBDDD8]/30 transition">
+            <td class="p-2 sm:p-3">
+              <input type="text" value="${item.name}" onchange="updateInsumo(${index}, 'name', this.value)" class="w-full p-1.5 bg-[#F8F9F7] border border-[#A68D77]/60 rounded font-semibold text-[#26150B] focus:ring-2 focus:ring-[#735840] outline-none text-xs sm:text-sm">
+            </td>
+            <td class="p-2 sm:p-3 text-right">
+              <input type="number" step="0.01" value="${item.price}" onchange="updateInsumo(${index}, 'price', parseFloat(this.value) || 0)" class="w-20 sm:w-24 p-1.5 bg-[#F8F9F7] border border-[#A68D77]/60 rounded text-right text-[#26150B] focus:ring-2 focus:ring-[#735840] outline-none text-xs sm:text-sm">
+            </td>
+            <td class="p-2 sm:p-3 text-right">
+              <input type="number" step="0.01" value="${item.qty}" onchange="updateInsumo(${index}, 'qty', parseFloat(this.value) || 0)" class="w-20 sm:w-24 p-1.5 bg-[#F8F9F7] border border-[#A68D77]/60 rounded text-right text-[#26150B] focus:ring-2 focus:ring-[#735840] outline-none text-xs sm:text-sm">
+            </td>
+            <td class="p-2 sm:p-3 text-center">
+              <select onchange="updateInsumo(${index}, 'unit', this.value)" class="p-1.5 border border-[#A68D77]/60 rounded text-xs bg-[#F8F9F7] text-[#26150B] font-semibold focus:ring-2 focus:ring-[#735840] outline-none">
+                <option value="g" ${item.unit === 'g' ? 'selected' : ''}>g</option>
+                <option value="un" ${item.unit === 'un' ? 'selected' : ''}>un</option>
+                <option value="ml" ${item.unit === 'ml' ? 'selected' : ''}>ml</option>
+                <option value="kg" ${item.unit === 'kg' ? 'selected' : ''}>kg</option>
+              </select>
+            </td>
+            <td class="p-2 sm:p-3 text-right font-bold bg-[#DBDDD8]/40 text-[#26150B]">
+              ${formatUnitCost(unitCost)}
+            </td>
+            <td class="p-2 sm:p-3 text-center">
+              <button onclick="removeInsumo(${index})" class="text-[#735840] hover:text-red-700 p-1 transition"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function renderRecipe() {
+      const tbody = document.getElementById('recipe-body');
+      tbody.innerHTML = '';
+
+      insumos.forEach((item, index) => {
+        const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
+        const recipeCost = unitCost * (item.recipeQty || 0);
+
+        tbody.innerHTML += `
+          <tr class="hover:bg-[#DBDDD8]/30 transition">
+            <td class="p-2.5 sm:p-3 font-semibold text-[#26150B] text-xs sm:text-sm">${item.name}</td>
+            <td class="p-2.5 sm:p-3 text-right">
+              <input type="number" step="0.01" value="${item.recipeQty || 0}" onchange="updateInsumo(${index}, 'recipeQty', parseFloat(this.value) || 0)" class="w-20 sm:w-24 p-1.5 bg-[#F8F9F7] border border-[#A68D77]/60 rounded text-right font-semibold text-[#26150B] focus:ring-2 focus:ring-[#735840] outline-none text-xs sm:text-sm">
+            </td>
+            <td class="p-2.5 sm:p-3 text-center text-xs text-[#735840] font-bold">${item.unit}</td>
+            <td class="p-2.5 sm:p-3 text-right font-bold text-[#26150B] bg-[#DBDDD8]/40">
+              ${formatCurrency(recipeCost)}
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function calculateAll() {
+      let totalRecipeCost = 0;
+
+      insumos.forEach(item => {
+        const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
+        totalRecipeCost += unitCost * (item.recipeQty || 0);
+      });
+
+      const yieldUnits = parseFloat(document.getElementById('recipe-yield').value) || 1;
+      const costPerUnit = yieldUnits > 0 ? (totalRecipeCost / yieldUnits) : 0;
+
+      document.getElementById('recipe-total-cost').innerText = formatCurrency(totalRecipeCost);
+      document.getElementById('cost-per-unit').innerText = formatCurrency(costPerUnit);
+      document.getElementById('sim-cost-base').innerText = formatCurrency(costPerUnit);
+
+      renderSimulations(costPerUnit);
+      saveData();
+    }
+
+    function renderSimulations(costBase) {
+      const tbody = document.getElementById('sim-body');
+      tbody.innerHTML = '';
+
+      const simulations = [
+        { method: 'Markup (60% sobre o custo)', margin: 60, type: 'markup' },
+        { method: 'Markup (80% sobre o custo)', margin: 80, type: 'markup' },
+        { method: 'Margem Real (60% do preço final)', margin: 60, type: 'real' },
+        { method: 'Margem Real (80% do preço final)', margin: 80, type: 'real' }
+      ];
+
+      simulations.forEach(sim => {
+        let suggestedPrice = 0;
+        let profit = 0;
+
+        if (sim.type === 'markup') {
+          suggestedPrice = costBase * (1 + sim.margin / 100);
+          profit = suggestedPrice - costBase;
+        } else {
+          suggestedPrice = sim.margin < 100 ? (costBase / (1 - sim.margin / 100)) : 0;
+          profit = suggestedPrice - costBase;
+        }
+
+        tbody.innerHTML += `
+          <tr class="hover:bg-[#DBDDD8]/30 transition">
+            <td class="p-2.5 sm:p-3 font-semibold text-[#26150B]">${sim.method}</td>
+            <td class="p-2.5 sm:p-3 text-center text-[#735840] font-bold">${sim.margin.toFixed(0)}%</td>
+            <td class="p-2.5 sm:p-3 text-right font-bold bg-[#DBDDD8]/40 text-[#26150B]">
+              ${formatCurrency(suggestedPrice)}
+            </td>
+            <td class="p-2.5 sm:p-3 text-right font-extrabold bg-emerald-100 text-emerald-900">
+              ${formatCurrency(profit)}
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function updateInsumo(index, field, value) {
+      insumos[index][field] = value;
+      renderInsumos();
+      renderRecipe();
+      calculateAll();
+    }
+
+    function addInsumoRow() {
+      insumos.push({ name: 'Novo Insumo', price: 0, qty: 1, unit: 'un', recipeQty: 0, stockCurrent: 0 });
+      renderInsumos();
+      renderRecipe();
+      calculateAll();
+    }
+
+    function removeInsumo(index) {
+      insumos.splice(index, 1);
+      renderInsumos();
+      renderRecipe();
+      calculateAll();
+    }
+
+    function resetPricingData() {
+      insumos = JSON.parse(JSON.stringify(defaultInsumos));
+      renderInsumos();
+      renderRecipe();
+      calculateAll();
+    }
+
+    function renderStock() {
+      const tbody = document.getElementById('stock-table-body');
+      tbody.innerHTML = '';
+
+      let lowAlerts = 0;
+
+      insumos.forEach((item, index) => {
+        const isLow = item.stockCurrent <= (item.recipeQty * 2);
+        if (isLow) lowAlerts++;
+
+        const step = item.unit === 'un' ? 1 : (item.unit === 'g' || item.unit === 'ml' ? 100 : 1);
+
+        tbody.innerHTML += `
+          <tr class="hover:bg-[#DBDDD8]/30 transition">
+            <td class="p-2.5 sm:p-3 font-bold text-[#26150B]">${item.name}</td>
+            
+            <!-- Edição Direta da Quantidade -->
+            <td class="p-2.5 sm:p-3 text-center">
+              <input type="number" value="${item.stockCurrent || 0}" onchange="updateStockManual(${index}, parseFloat(this.value) || 0)" class="w-24 sm:w-28 p-1.5 text-center bg-[#F8F9F7] border border-[#A68D77] rounded font-black text-[#26150B] text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#735840]">
+            </td>
+
+            <td class="p-2.5 sm:p-3 text-center text-xs font-bold text-[#735840]">${item.unit}</td>
+
+            <td class="p-2.5 sm:p-3 text-center">
+              ${isLow 
+                ? '<span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-amber-100 text-amber-900 border border-amber-300 text-[10px] sm:text-xs font-bold rounded-full inline-block">Reposição Baixa</span>' 
+                : '<span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 text-[10px] sm:text-xs font-bold rounded-full inline-block">Estoque OK</span>'}
+            </td>
+
+            <!-- Ações Rápidas Pré-definidas (+/-) -->
+            <td class="p-2.5 sm:p-3 text-center">
+              <div class="inline-flex items-center space-x-1">
+                <button onclick="changeStock(${index}, -${step})" class="w-7 h-7 flex items-center justify-center bg-[#DBDDD8] hover:bg-[#A68D77] hover:text-white text-[#26150B] text-xs font-bold rounded border border-[#A68D77]/40 active:scale-95 transition">-${step}</button>
+                <button onclick="changeStock(${index}, ${step})" class="w-7 h-7 flex items-center justify-center bg-[#735840] text-white hover:bg-[#403022] text-xs font-bold rounded shadow-sm active:scale-95 transition">+${step}</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('stock-total-items').innerText = insumos.length;
+      document.getElementById('stock-low-alerts').innerText = lowAlerts;
+      document.getElementById('ready-brownies-qty').innerText = `${readyBrownies} un`;
+    }
+
+    function updateStockManual(index, value) {
+      insumos[index].stockCurrent = Math.max(0, value);
+      saveData();
+      renderStock();
+    }
+
+    function changeStock(index, delta) {
+      insumos[index].stockCurrent = Math.max(0, (insumos[index].stockCurrent || 0) + delta);
+      saveData();
+      renderStock();
+    }
+
+    function updateReadyBrownies(delta) {
+      readyBrownies = Math.max(0, readyBrownies + delta);
+      localStorage.setItem('chocoffee_ready_qty', readyBrownies);
+      renderStock();
+    }
+
+    function saveData() {
+      localStorage.setItem('chocoffee_insumos', JSON.stringify(insumos));
+    }
+
+    // Inicialização da Página
+    renderInsumos();
+    renderRecipe();
+    calculateAll();
+  </script>
+</body>
+</html>
