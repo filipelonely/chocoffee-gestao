@@ -8,116 +8,116 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f2f3f0; color: #26150B; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #DBDDD8; color: #26150B; }
     .font-brand { font-family: 'Playfair Display', serif; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col text-sm">
 
-  <!-- Cabeçalho em Tom Escuro Elegante -->
-  <header class="bg-[#26150B] text-[#DBDDD8] border-b border-[#735840]/40 sticky top-0 z-50 px-3 py-3 shadow-md">
-    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+  <!-- Cabeçalho -->
+  <header class="bg-[#26150B] text-[#DBDDD8] border-b border-[#735840]/40 sticky top-0 z-50 px-4 py-3 shadow-md">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
       
-      <!-- Marca -->
-      <div class="flex items-center space-x-2.5 w-full sm:w-auto justify-between sm:justify-start">
-        <div class="flex items-center space-x-2.5">
-          <div class="w-8 h-8 rounded-full border border-[#A68D77] flex items-center justify-center bg-[#403022]">
-            <span class="font-brand text-[#A68D77] italic font-bold text-base leading-none">CP</span>
+      <!-- Marca / Logo -->
+      <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+        <div class="flex items-center space-x-3">
+          <!-- Logo em PNG -->
+          <div class="w-10 h-10 rounded-full bg-[#f4ebd0] flex items-center justify-center p-0.5 border border-[#A68D77] shadow-sm overflow-hidden flex-shrink-0">
+            <img src="logo.png" alt="Confeitaria ChoCoffee Paixão" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\'fa-solid fa-cookie-bite text-[#26150B] text-lg\'></i>';">
           </div>
           <div>
-            <h1 class="font-brand text-base font-bold text-[#DBDDD8] leading-tight">Confeitaria ChoCoffee Paixão</h1>
-            <span class="text-[9px] text-[#A68D77] font-semibold uppercase tracking-wider block">Gestão & Precificação</span>
+            <h1 class="font-brand text-lg font-bold text-[#DBDDD8] leading-tight">Confeitaria ChoCoffee Paixão</h1>
+            <span class="text-[10px] text-[#A68D77] font-semibold uppercase tracking-wider block">GESTÃO & PRECIFICAÇÃO</span>
           </div>
         </div>
       </div>
 
       <!-- Navegação por Abas -->
-      <nav class="grid grid-cols-2 gap-1.5 w-full sm:w-auto bg-[#1a0e07] p-1 rounded-xl border border-[#735840]/40">
-        <button onclick="switchTab('pricing')" id="nav-pricing" class="py-2 px-3 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center">
-          <i class="fa-solid fa-calculator mr-1.5"></i>Precificação
+      <nav class="flex space-x-2 w-full sm:w-auto bg-[#1a0e07] p-1 rounded-xl border border-[#735840]/40">
+        <button onclick="switchTab('pricing')" id="nav-pricing" class="flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center">
+          <i class="fa-solid fa-calculator mr-2"></i>Precificação
         </button>
-        <button onclick="switchTab('stock')" id="nav-stock" class="py-2 px-3 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center">
-          <i class="fa-solid fa-boxes-stacked mr-1.5"></i>Estoque
+        <button onclick="switchTab('stock')" id="nav-stock" class="flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center">
+          <i class="fa-solid fa-boxes-stacked mr-2"></i>Estoque
         </button>
       </nav>
     </div>
   </header>
 
-  <main class="flex-grow max-w-5xl mx-auto w-full p-3 sm:p-5 space-y-5">
+  <main class="flex-grow max-w-6xl mx-auto w-full p-3 sm:p-6 space-y-6">
 
     <!-- ABA 1: PRECIFICAÇÃO -->
-    <div id="tab-pricing" class="block space-y-5">
+    <div id="tab-pricing" class="block space-y-6">
       
       <!-- Banner de Cabeçalho -->
-      <div class="bg-white p-4 rounded-xl border border-[#735840]/20 shadow-sm flex items-center justify-between gap-3">
+      <div class="bg-white p-5 rounded-2xl border border-[#735840]/20 shadow-sm flex items-center justify-between gap-4">
         <div>
-          <h2 class="font-brand text-lg font-bold text-[#26150B]">Ficha Técnica & Custos</h2>
-          <p class="text-[11px] text-[#735840]">Ajuste seus insumos e veja o valor real por unidade.</p>
+          <h2 class="font-brand text-2xl font-bold text-[#26150B]">Ficha Técnica & Precificação</h2>
+          <p class="text-xs text-[#735840] mt-0.5">Ajuste seus insumos e veja o valor real por unidade.</p>
         </div>
-        <button onclick="resetPricingData()" title="Restaurar Padrões" class="text-xs bg-[#DBDDD8] hover:bg-[#A68D77] text-[#26150B] px-3 py-2 rounded-lg transition border border-[#735840]/30 flex-shrink-0 font-bold">
+        <button onclick="resetPricingData()" title="Restaurar Dados Padrão" class="text-xs bg-[#26150B] hover:bg-[#403022] text-[#DBDDD8] p-3 rounded-xl transition font-bold flex items-center justify-center shadow-sm flex-shrink-0">
           <i class="fa-solid fa-rotate-left"></i>
         </button>
       </div>
 
       <!-- SEÇÃO 1: INSUMOS -->
-      <div class="bg-white rounded-xl border border-[#735840]/20 overflow-hidden shadow-sm">
-        <div class="p-3 bg-[#26150B] text-[#DBDDD8] flex items-center justify-between">
-          <h3 class="font-bold text-xs uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-cart-shopping mr-2 text-[#A68D77]"></i> 1. Cadastro de Insumos
+      <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
+        <div class="p-4 bg-[#26150B] text-[#DBDDD8] flex items-center justify-between">
+          <h3 class="font-bold text-sm uppercase tracking-wider flex items-center">
+            <i class="fa-solid fa-cart-shopping mr-2.5 text-[#A68D77]"></i> 1. CADASTRO DE INSUMOS
           </h3>
-          <button onclick="addInsumoRow()" class="text-xs font-bold bg-[#A68D77] hover:bg-[#DBDDD8] text-[#26150B] px-3 py-1.5 rounded-lg transition">
+          <button onclick="addInsumoRow()" class="text-xs font-bold bg-[#A68D77] hover:bg-white hover:text-[#26150B] text-[#26150B] px-4 py-2 rounded-xl transition shadow-sm border border-[#A68D77]">
             + Insumo
           </button>
         </div>
         
-        <!-- Conteúdo Renderizado em Cards (Mobile) e Tabela (Desktop) -->
-        <div id="insumos-container" class="p-2 sm:p-0">
+        <div id="insumos-container">
           <!-- JS renderiza aqui -->
         </div>
       </div>
 
       <!-- SEÇÃO 2: RECEITA -->
-      <div class="bg-white rounded-xl border border-[#735840]/20 overflow-hidden shadow-sm">
-        <div class="p-3 bg-[#26150B] text-[#DBDDD8]">
-          <h3 class="font-bold text-xs uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-utensils mr-2 text-[#A68D77]"></i> 2. Ficha Técnica (Receita de Brownie)
+      <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
+        <div class="p-4 bg-[#26150B] text-[#DBDDD8]">
+          <h3 class="font-bold text-sm uppercase tracking-wider flex items-center">
+            <i class="fa-solid fa-utensils mr-2.5 text-[#A68D77]"></i> 2. Ficha Técnica (Receita de Brownie)
           </h3>
         </div>
 
-        <div id="recipe-container" class="p-2 sm:p-0">
+        <div id="recipe-container">
           <!-- JS renderiza aqui -->
         </div>
 
         <!-- Totais da Receita -->
-        <div class="bg-[#f7f8f5] p-3 border-t border-[#735840]/20 space-y-2">
-          <div class="flex justify-between items-center text-xs">
+        <div class="bg-[#f7f8f5] p-4 border-t border-[#735840]/20 space-y-3">
+          <div class="flex justify-between items-center text-xs sm:text-sm">
             <span class="text-[#735840] font-semibold">Custo Total da Receita:</span>
-            <span id="recipe-total-cost" class="font-extrabold text-[#26150B] text-sm">R$ 0,00</span>
+            <span id="recipe-total-cost" class="font-extrabold text-[#26150B] text-base">R$ 0,00</span>
           </div>
-          <div class="flex justify-between items-center text-xs">
+          <div class="flex justify-between items-center text-xs sm:text-sm">
             <span class="text-[#735840] font-semibold">Rendimento da Receita:</span>
-            <div class="flex items-center space-x-1">
-              <input type="number" id="recipe-yield" value="12" oninput="calculateAll()" class="w-16 p-1 text-center bg-white border border-[#735840]/40 rounded font-bold text-[#26150B] outline-none text-xs shadow-inner">
-              <span class="text-[#735840]">un</span>
+            <div class="flex items-center space-x-1.5">
+              <input type="number" id="recipe-yield" value="12" oninput="calculateAll()" class="w-20 p-1.5 text-center bg-white border border-[#735840]/40 rounded-lg font-bold text-[#26150B] outline-none text-xs shadow-inner">
+              <span class="text-[#735840] font-bold">un</span>
             </div>
           </div>
-          <div class="flex justify-between items-center p-2.5 bg-[#403022] text-[#DBDDD8] rounded-lg shadow-sm">
-            <span class="font-bold text-xs">CUSTO POR BROWNIE:</span>
-            <span id="cost-per-unit" class="text-base font-black text-[#DBDDD8]">R$ 0,00</span>
+          <div class="flex justify-between items-center p-3.5 bg-[#26150B] text-[#DBDDD8] rounded-xl shadow-sm">
+            <span class="font-bold text-xs sm:text-sm uppercase tracking-wider">CUSTO POR BROWNIE:</span>
+            <span id="cost-per-unit" class="text-lg sm:text-xl font-black text-[#DBDDD8]">R$ 0,00</span>
           </div>
         </div>
       </div>
 
       <!-- SEÇÃO 3: PREÇO DE VENDA -->
-      <div class="bg-white rounded-xl border border-[#735840]/20 overflow-hidden shadow-sm">
-        <div class="p-3 bg-[#26150B] text-[#DBDDD8] flex justify-between items-center">
-          <h3 class="font-bold text-xs uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-chart-line mr-2 text-[#A68D77]"></i> 3. Sugestão de Preço
+      <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
+        <div class="p-4 bg-[#26150B] text-[#DBDDD8] flex justify-between items-center">
+          <h3 class="font-bold text-sm uppercase tracking-wider flex items-center">
+            <i class="fa-solid fa-chart-line mr-2.5 text-[#A68D77]"></i> 3. Sugestão de Preço
           </h3>
-          <span class="text-[10px] text-[#A68D77]">Base: <strong id="sim-cost-base" class="text-white">R$ 0,00</strong></span>
+          <span class="text-xs text-[#A68D77]">Custo Base: <strong id="sim-cost-base" class="text-white">R$ 0,00</strong></span>
         </div>
 
-        <div id="sim-container" class="p-2 sm:p-0">
+        <div id="sim-container">
           <!-- JS renderiza aqui -->
         </div>
       </div>
@@ -125,34 +125,34 @@
     </div>
 
     <!-- ABA 2: ESTOQUE -->
-    <div id="tab-stock" class="hidden space-y-5">
+    <div id="tab-stock" class="hidden space-y-6">
       
       <!-- Cards de Métricas -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-        <div class="bg-white p-3 rounded-xl border border-[#735840]/20 text-center shadow-sm">
-          <span class="text-[10px] font-bold text-[#735840] uppercase block">Insumos</span>
-          <span id="stock-total-items" class="text-xl font-black text-[#26150B] mt-0.5 block">0</span>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-[#735840]/20 text-center shadow-sm">
+          <span class="text-xs font-bold text-[#735840] uppercase block">Insumos Cadastrados</span>
+          <span id="stock-total-items" class="text-2xl font-black text-[#26150B] mt-1 block">0</span>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-[#735840]/20 text-center shadow-sm">
-          <span class="text-[10px] font-bold text-[#735840] uppercase block">Alerta Reposição</span>
-          <span id="stock-low-alerts" class="text-xl font-black text-amber-600 mt-0.5 block">0</span>
+        <div class="bg-white p-4 rounded-2xl border border-[#735840]/20 text-center shadow-sm">
+          <span class="text-xs font-bold text-[#735840] uppercase block">Alerta Reposição</span>
+          <span id="stock-low-alerts" class="text-2xl font-black text-amber-600 mt-1 block">0</span>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-[#735840]/20 text-center shadow-sm col-span-2 sm:col-span-1">
-          <span class="text-[10px] font-bold text-[#735840] uppercase block">Brownies Prontos</span>
-          <div class="flex items-center justify-center space-x-2 mt-1">
-            <button onclick="updateReadyBrownies(-1)" class="w-7 h-7 bg-[#26150B] hover:bg-[#735840] text-[#DBDDD8] rounded-lg font-bold text-xs shadow-sm">-</button>
-            <span id="ready-brownies-qty" class="text-base font-black text-emerald-700">0 un</span>
-            <button onclick="updateReadyBrownies(1)" class="w-7 h-7 bg-[#A68D77] text-[#26150B] hover:bg-[#735840] hover:text-white rounded-lg font-bold text-xs shadow-sm">+</button>
+        <div class="bg-white p-4 rounded-2xl border border-[#735840]/20 text-center shadow-sm col-span-2 sm:col-span-1">
+          <span class="text-xs font-bold text-[#735840] uppercase block">Brownies Prontos</span>
+          <div class="flex items-center justify-center space-x-3 mt-1">
+            <button onclick="updateReadyBrownies(-1)" class="w-8 h-8 bg-[#26150B] hover:bg-[#735840] text-[#DBDDD8] rounded-xl font-bold text-sm shadow-sm transition">-</button>
+            <span id="ready-brownies-qty" class="text-lg font-black text-emerald-700">0 un</span>
+            <button onclick="updateReadyBrownies(1)" class="w-8 h-8 bg-[#A68D77] text-[#26150B] hover:bg-[#735840] hover:text-white rounded-xl font-bold text-sm shadow-sm transition">+</button>
           </div>
         </div>
       </div>
 
       <!-- Lista de Estoque -->
-      <div class="bg-white rounded-xl border border-[#735840]/20 overflow-hidden shadow-sm">
-        <div class="p-3 bg-[#26150B] text-[#DBDDD8]">
-          <h3 class="font-bold text-xs uppercase tracking-wider">Estoque Atual</h3>
+      <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
+        <div class="p-4 bg-[#26150B] text-[#DBDDD8]">
+          <h3 class="font-bold text-sm uppercase tracking-wider">Estoque Atual de Insumos</h3>
         </div>
-        <div id="stock-container" class="p-2 sm:p-0">
+        <div id="stock-container">
           <!-- JS renderiza aqui -->
         </div>
       </div>
@@ -179,13 +179,13 @@
       if (tab === 'pricing') {
         document.getElementById('tab-pricing').classList.remove('hidden');
         document.getElementById('tab-stock').classList.add('hidden');
-        document.getElementById('nav-pricing').className = 'py-2 px-3 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center';
-        document.getElementById('nav-stock').className = 'py-2 px-3 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center';
+        document.getElementById('nav-pricing').className = 'flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center';
+        document.getElementById('nav-stock').className = 'flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center';
       } else {
         document.getElementById('tab-pricing').classList.add('hidden');
         document.getElementById('tab-stock').classList.remove('hidden');
-        document.getElementById('nav-stock').className = 'py-2 px-3 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center';
-        document.getElementById('nav-pricing').className = 'py-2 px-3 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center';
+        document.getElementById('nav-stock').className = 'flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center';
+        document.getElementById('nav-pricing').className = 'flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center';
         renderStock();
       }
     }
@@ -205,84 +205,164 @@
     function renderInsumos() {
       const container = document.getElementById('insumos-container');
       
-      let html = '<div class="space-y-2.5 sm:space-y-0 sm:divide-y sm:divide-[#735840]/15">';
-      
+      let html = `
+        <div class="hidden md:block overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] uppercase tracking-wider font-bold">
+                <th class="py-3 px-4 w-2/5">INSUMO</th>
+                <th class="py-3 px-4 text-center">PREÇO DE COMPRA</th>
+                <th class="py-3 px-4 text-center">QTD COMPRADA</th>
+                <th class="py-3 px-4 text-center">UNIDADE</th>
+                <th class="py-3 px-4 text-right">CUSTO UNITÁRIO</th>
+                <th class="py-3 px-4 w-10"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#735840]/15">
+      `;
+
       insumos.forEach((item, index) => {
         const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
         
         html += `
-          <div class="bg-[#fcfdfb] sm:bg-transparent p-3 sm:p-3 rounded-xl sm:rounded-none border sm:border-none border-[#735840]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-            
-            <div class="flex items-center justify-between sm:w-1/3">
-              <input type="text" value="${item.name}" onchange="updateInsumo(${index}, 'name', this.value)" class="w-full p-1.5 bg-white border border-[#735840]/30 rounded font-bold text-[#26150B] outline-none text-xs focus:border-[#735840]">
-              <button onclick="removeInsumo(${index})" class="text-[#735840] hover:text-red-600 p-1 sm:hidden ml-2"><i class="fa-solid fa-trash-can text-xs"></i></button>
+          <tr class="hover:bg-[#fcfdfb]">
+            <td class="py-2.5 px-4">
+              <input type="text" value="${item.name}" onchange="updateInsumo(${index}, 'name', this.value)" class="w-full p-2 bg-white border border-[#735840]/30 rounded-lg font-bold text-[#26150B] outline-none text-xs focus:border-[#735840]">
+            </td>
+            <td class="py-2.5 px-4 text-center">
+              <input type="number" step="0.01" value="${item.price}" onchange="updateInsumo(${index}, 'price', parseFloat(this.value) || 0)" class="w-28 p-2 bg-white border border-[#735840]/30 rounded-lg text-center font-semibold text-[#26150B] text-xs outline-none">
+            </td>
+            <td class="py-2.5 px-4 text-center">
+              <input type="number" step="0.01" value="${item.qty}" onchange="updateInsumo(${index}, 'qty', parseFloat(this.value) || 0)" class="w-28 p-2 bg-white border border-[#735840]/30 rounded-lg text-center font-semibold text-[#26150B] text-xs outline-none">
+            </td>
+            <td class="py-2.5 px-4 text-center">
+              <select onchange="updateInsumo(${index}, 'unit', this.value)" class="w-20 p-2 border border-[#735840]/30 rounded-lg text-xs bg-white text-[#26150B] font-semibold outline-none text-center">
+                <option value="g" ${item.unit === 'g' ? 'selected' : ''}>g</option>
+                <option value="un" ${item.unit === 'un' ? 'selected' : ''}>un</option>
+                <option value="ml" ${item.unit === 'ml' ? 'selected' : ''}>ml</option>
+                <option value="kg" ${item.unit === 'kg' ? 'selected' : ''}>kg</option>
+              </select>
+            </td>
+            <td class="py-2.5 px-4 text-right font-black text-xs text-[#26150B]">
+              ${formatUnitCost(unitCost)}
+            </td>
+            <td class="py-2.5 px-4 text-center">
+              <button onclick="removeInsumo(${index})" class="text-[#735840] hover:text-red-600 transition p-1"><i class="fa-solid fa-trash-can text-sm"></i></button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      html += '<div class="md:hidden p-3 space-y-3">';
+      insumos.forEach((item, index) => {
+        const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
+        
+        html += `
+          <div class="bg-[#fcfdfb] p-3 rounded-xl border border-[#735840]/20 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <input type="text" value="${item.name}" onchange="updateInsumo(${index}, 'name', this.value)" class="w-full p-1.5 bg-white border border-[#735840]/30 rounded-lg font-bold text-[#26150B] outline-none text-xs">
+              <button onclick="removeInsumo(${index})" class="text-[#735840] hover:text-red-600 p-1 ml-2"><i class="fa-solid fa-trash-can text-xs"></i></button>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:space-x-2 sm:w-2/3 justify-end">
+            <div class="grid grid-cols-3 gap-2">
               <div>
-                <span class="text-[9px] text-[#735840] uppercase font-bold block sm:hidden">Preço</span>
-                <input type="number" step="0.01" value="${item.price}" onchange="updateInsumo(${index}, 'price', parseFloat(this.value) || 0)" class="w-full sm:w-20 p-1.5 bg-white border border-[#735840]/30 rounded text-right text-[#26150B] text-xs outline-none">
+                <span class="text-[9px] text-[#735840] uppercase font-bold block">Preço</span>
+                <input type="number" step="0.01" value="${item.price}" onchange="updateInsumo(${index}, 'price', parseFloat(this.value) || 0)" class="w-full p-1.5 bg-white border border-[#735840]/30 rounded-lg text-right text-[#26150B] text-xs outline-none">
               </div>
 
               <div>
-                <span class="text-[9px] text-[#735840] uppercase font-bold block sm:hidden">Qtd</span>
-                <input type="number" step="0.01" value="${item.qty}" onchange="updateInsumo(${index}, 'qty', parseFloat(this.value) || 0)" class="w-full sm:w-20 p-1.5 bg-white border border-[#735840]/30 rounded text-right text-[#26150B] text-xs outline-none">
+                <span class="text-[9px] text-[#735840] uppercase font-bold block">Qtd</span>
+                <input type="number" step="0.01" value="${item.qty}" onchange="updateInsumo(${index}, 'qty', parseFloat(this.value) || 0)" class="w-full p-1.5 bg-white border border-[#735840]/30 rounded-lg text-right text-[#26150B] text-xs outline-none">
               </div>
 
               <div>
-                <span class="text-[9px] text-[#735840] uppercase font-bold block sm:hidden">Unid</span>
-                <select onchange="updateInsumo(${index}, 'unit', this.value)" class="w-full sm:w-16 p-1.5 border border-[#735840]/30 rounded text-xs bg-white text-[#26150B] outline-none">
+                <span class="text-[9px] text-[#735840] uppercase font-bold block">Unidade</span>
+                <select onchange="updateInsumo(${index}, 'unit', this.value)" class="w-full p-1.5 border border-[#735840]/30 rounded-lg text-xs bg-white text-[#26150B] outline-none">
                   <option value="g" ${item.unit === 'g' ? 'selected' : ''}>g</option>
                   <option value="un" ${item.unit === 'un' ? 'selected' : ''}>un</option>
                   <option value="ml" ${item.unit === 'ml' ? 'selected' : ''}>ml</option>
                   <option value="kg" ${item.unit === 'kg' ? 'selected' : ''}>kg</option>
                 </select>
               </div>
-
-              <div class="col-span-3 sm:col-span-1 flex justify-between sm:justify-end items-center mt-1 sm:mt-0 p-1.5 sm:p-0 bg-[#f2f3f0] sm:bg-transparent rounded border sm:border-none border-[#735840]/20">
-                <span class="text-[10px] text-[#735840] sm:hidden font-semibold">Custo Unit:</span>
-                <span class="font-bold text-xs text-[#735840]">${formatUnitCost(unitCost)}</span>
-              </div>
-
-              <button onclick="removeInsumo(${index})" class="hidden sm:block text-[#735840] hover:text-red-600 p-1 ml-2"><i class="fa-solid fa-trash-can text-xs"></i></button>
             </div>
 
+            <div class="flex justify-between items-center p-2 bg-[#f2f3f0] rounded-lg border border-[#735840]/20">
+              <span class="text-[10px] text-[#735840] font-semibold">Custo Unitário:</span>
+              <span class="font-bold text-xs text-[#26150B]">${formatUnitCost(unitCost)}</span>
+            </div>
           </div>
         `;
       });
-      
       html += '</div>';
+
       container.innerHTML = html;
     }
 
     function renderRecipe() {
       const container = document.getElementById('recipe-container');
-      let html = '<div class="space-y-2 sm:space-y-0 sm:divide-y sm:divide-[#735840]/15">';
+
+      let html = `
+        <div class="hidden md:block overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] uppercase tracking-wider font-bold">
+                <th class="py-3 px-4 w-1/2">INGREDIENTE</th>
+                <th class="py-3 px-4 text-center">QTD UTILIZADA</th>
+                <th class="py-3 px-4 text-center">UNIDADE</th>
+                <th class="py-3 px-4 text-right">CUSTO NA RECEITA</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#735840]/15">
+      `;
 
       insumos.forEach((item, index) => {
         const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
         const recipeCost = unitCost * (item.recipeQty || 0);
 
         html += `
-          <div class="bg-[#fcfdfb] sm:bg-transparent p-2.5 rounded-xl sm:rounded-none border sm:border-none border-[#735840]/20 flex items-center justify-between gap-2">
-            <div class="w-1/2 sm:w-1/3">
-              <span class="font-semibold text-xs text-[#26150B] block truncate">${item.name}</span>
-            </div>
+          <tr class="hover:bg-[#fcfdfb]">
+            <td class="py-2.5 px-4 font-bold text-xs text-[#26150B]">${item.name}</td>
+            <td class="py-2.5 px-4 text-center">
+              <input type="number" step="0.01" value="${item.recipeQty || 0}" onchange="updateInsumo(${index}, 'recipeQty', parseFloat(this.value) || 0)" class="w-28 p-2 bg-white border border-[#735840]/30 rounded-lg text-center font-bold text-xs text-[#26150B] outline-none">
+            </td>
+            <td class="py-2.5 px-4 text-center text-xs font-bold text-[#735840]">${item.unit}</td>
+            <td class="py-2.5 px-4 text-right font-black text-xs text-[#26150B]">${formatCurrency(recipeCost)}</td>
+          </tr>
+        `;
+      });
 
-            <div class="flex items-center space-x-2 justify-end w-1/2 sm:w-2/3">
+      html += `
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      html += '<div class="md:hidden p-3 space-y-2">';
+      insumos.forEach((item, index) => {
+        const unitCost = item.qty > 0 ? (item.price / item.qty) : 0;
+        const recipeCost = unitCost * (item.recipeQty || 0);
+
+        html += `
+          <div class="bg-[#fcfdfb] p-2.5 rounded-xl border border-[#735840]/20 flex items-center justify-between gap-2">
+            <span class="font-bold text-xs text-[#26150B] truncate w-1/2">${item.name}</span>
+            <div class="flex items-center space-x-2 justify-end w-1/2">
               <div class="flex items-center space-x-1">
-                <input type="number" step="0.01" value="${item.recipeQty || 0}" onchange="updateInsumo(${index}, 'recipeQty', parseFloat(this.value) || 0)" class="w-16 p-1 bg-white border border-[#735840]/30 rounded text-right text-xs font-semibold text-[#26150B] outline-none">
-                <span class="text-[10px] text-[#735840] font-bold w-4">${item.unit}</span>
+                <input type="number" step="0.01" value="${item.recipeQty || 0}" onchange="updateInsumo(${index}, 'recipeQty', parseFloat(this.value) || 0)" class="w-16 p-1 bg-white border border-[#735840]/30 rounded-lg text-right text-xs font-semibold text-[#26150B] outline-none">
+                <span class="text-[10px] text-[#735840] font-bold">${item.unit}</span>
               </div>
-              <div class="text-right min-w-[70px]">
-                <span class="font-bold text-xs text-[#26150B]">${formatCurrency(recipeCost)}</span>
-              </div>
+              <span class="font-bold text-xs text-[#26150B] min-w-[60px] text-right">${formatCurrency(recipeCost)}</span>
             </div>
           </div>
         `;
       });
-
       html += '</div>';
+
       container.innerHTML = html;
     }
 
@@ -307,7 +387,6 @@
 
     function renderSimulations(costBase) {
       const container = document.getElementById('sim-container');
-      let html = '<div class="space-y-2 sm:space-y-0 sm:divide-y sm:divide-[#735840]/15">';
 
       const simulations = [
         { method: 'Markup (60%)', margin: 60, type: 'markup' },
@@ -316,6 +395,19 @@
         { method: 'Margem Real (80%)', margin: 80, type: 'real' }
       ];
 
+      let html = `
+        <div class="hidden md:block overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] uppercase tracking-wider font-bold">
+                <th class="py-3 px-4">MÉTODO / MARGEM</th>
+                <th class="py-3 px-4 text-center">PREÇO SUGERIDO</th>
+                <th class="py-3 px-4 text-right">LUCRO POR UNIDADE</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#735840]/15">
+      `;
+
       simulations.forEach(sim => {
         let suggestedPrice = sim.type === 'markup' 
           ? costBase * (1 + sim.margin / 100)
@@ -323,14 +415,34 @@
         let profit = suggestedPrice - costBase;
 
         html += `
-          <div class="bg-[#fcfdfb] sm:bg-transparent p-2.5 rounded-xl sm:rounded-none border sm:border-none border-[#735840]/20 flex items-center justify-between text-xs">
-            <div>
-              <span class="font-semibold text-[#26150B] block">${sim.method}</span>
-            </div>
+          <tr class="hover:bg-[#fcfdfb]">
+            <td class="py-3 px-4 font-bold text-xs text-[#26150B]">${sim.method}</td>
+            <td class="py-3 px-4 text-center font-bold text-xs text-[#26150B]">${formatCurrency(suggestedPrice)}</td>
+            <td class="py-3 px-4 text-right font-black text-xs text-emerald-700">${formatCurrency(profit)}</td>
+          </tr>
+        `;
+      });
+
+      html += `
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      html += '<div class="md:hidden p-3 space-y-2">';
+      simulations.forEach(sim => {
+        let suggestedPrice = sim.type === 'markup' 
+          ? costBase * (1 + sim.margin / 100)
+          : (sim.margin < 100 ? (costBase / (1 - sim.margin / 100)) : 0);
+        let profit = suggestedPrice - costBase;
+
+        html += `
+          <div class="bg-[#fcfdfb] p-2.5 rounded-xl border border-[#735840]/20 flex items-center justify-between text-xs">
+            <span class="font-bold text-[#26150B]">${sim.method}</span>
             <div class="flex items-center space-x-3 text-right">
               <div>
                 <span class="text-[9px] text-[#735840] font-bold block">Venda</span>
-                <span class="font-bold text-[#735840]">${formatCurrency(suggestedPrice)}</span>
+                <span class="font-bold text-[#26150B]">${formatCurrency(suggestedPrice)}</span>
               </div>
               <div>
                 <span class="text-[9px] text-emerald-700 font-bold block">Lucro</span>
@@ -340,8 +452,8 @@
           </div>
         `;
       });
-
       html += '</div>';
+
       container.innerHTML = html;
     }
 
@@ -377,7 +489,20 @@
 
     function renderStock() {
       const container = document.getElementById('stock-container');
-      let html = '<div class="space-y-2 sm:space-y-0 sm:divide-y sm:divide-[#735840]/15">';
+      
+      let html = `
+        <div class="hidden md:block overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#26150B] text-[#DBDDD8] text-[11px] uppercase tracking-wider font-bold">
+                <th class="py-3 px-4">INSUMO</th>
+                <th class="py-3 px-4 text-center">STATUS</th>
+                <th class="py-3 px-4 text-center">ESTOQUE ATUAL</th>
+                <th class="py-3 px-4 text-right">AÇÕES RÁPIDAS</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#735840]/15">
+      `;
 
       let lowAlerts = 0;
 
@@ -388,8 +513,42 @@
         const step = item.unit === 'un' ? 1 : 100;
 
         html += `
-          <div class="bg-[#fcfdfb] sm:bg-transparent p-3 rounded-xl sm:rounded-none border sm:border-none border-[#735840]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-            
+          <tr class="hover:bg-[#fcfdfb]">
+            <td class="py-3 px-4 font-bold text-xs text-[#26150B]">${item.name}</td>
+            <td class="py-3 px-4 text-center">
+              ${isLow 
+                ? '<span class="px-2.5 py-1 bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-bold rounded-full">Reposição Necessária</span>' 
+                : '<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold rounded-full">OK</span>'}
+            </td>
+            <td class="py-3 px-4 text-center">
+              <div class="inline-flex items-center space-x-1.5">
+                <input type="number" value="${item.stockCurrent || 0}" onchange="updateStockManual(${index}, parseFloat(this.value) || 0)" class="w-24 p-1.5 text-center bg-white border border-[#735840]/30 rounded-lg font-black text-[#26150B] text-xs outline-none">
+                <span class="text-xs font-bold text-[#735840]">${item.unit}</span>
+              </div>
+            </td>
+            <td class="py-3 px-4 text-right">
+              <div class="inline-flex space-x-1">
+                <button onclick="changeStock(${index}, -${step})" class="px-3 py-1.5 bg-[#26150B] hover:bg-[#735840] text-[#DBDDD8] text-xs font-bold rounded-lg transition">-${step} ${item.unit}</button>
+                <button onclick="changeStock(${index}, ${step})" class="px-3 py-1.5 bg-[#A68D77] text-[#26150B] hover:bg-[#735840] hover:text-white text-xs font-bold rounded-lg transition">+${step} ${item.unit}</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      html += '<div class="md:hidden p-3 space-y-3">';
+      insumos.forEach((item, index) => {
+        const isLow = item.stockCurrent <= (item.recipeQty * 2);
+        const step = item.unit === 'un' ? 1 : 100;
+
+        html += `
+          <div class="bg-[#fcfdfb] p-3 rounded-xl border border-[#735840]/20 flex flex-col gap-2.5">
             <div class="flex items-center justify-between">
               <span class="font-bold text-xs text-[#26150B]">${item.name}</span>
               ${isLow 
@@ -397,25 +556,23 @@
                 : '<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold rounded-full">OK</span>'}
             </div>
 
-            <div class="flex items-center justify-between sm:justify-end space-x-3">
+            <div class="flex items-center justify-between space-x-3">
               <div class="flex items-center space-x-1">
                 <span class="text-[10px] text-[#735840] font-semibold">Qtd:</span>
-                <input type="number" value="${item.stockCurrent || 0}" onchange="updateStockManual(${index}, parseFloat(this.value) || 0)" class="w-20 p-1 text-center bg-white border border-[#735840]/30 rounded font-black text-[#26150B] text-xs outline-none">
+                <input type="number" value="${item.stockCurrent || 0}" onchange="updateStockManual(${index}, parseFloat(this.value) || 0)" class="w-20 p-1 text-center bg-white border border-[#735840]/30 rounded-lg font-black text-[#26150B] text-xs outline-none">
                 <span class="text-[10px] text-[#735840] font-bold">${item.unit}</span>
               </div>
 
-              <!-- Botões rápidos de ação -->
               <div class="flex space-x-1">
-                <button onclick="changeStock(${index}, -${step})" class="px-2.5 py-1 bg-[#26150B] hover:bg-[#735840] text-[#DBDDD8] text-xs font-bold rounded border border-[#735840]/40">-${step}</button>
-                <button onclick="changeStock(${index}, ${step})" class="px-2.5 py-1 bg-[#A68D77] text-[#26150B] hover:bg-[#735840] hover:text-white text-xs font-bold rounded">+</button>
+                <button onclick="changeStock(${index}, -${step})" class="px-2.5 py-1 bg-[#26150B] text-[#DBDDD8] text-xs font-bold rounded-lg">-${step}</button>
+                <button onclick="changeStock(${index}, ${step})" class="px-2.5 py-1 bg-[#A68D77] text-[#26150B] text-xs font-bold rounded-lg">+</button>
               </div>
             </div>
-
           </div>
         `;
       });
-
       html += '</div>';
+
       container.innerHTML = html;
 
       document.getElementById('stock-total-items').innerText = insumos.length;
