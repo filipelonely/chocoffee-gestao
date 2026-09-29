@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Confeitaria ChoCoffee Paixão | Gestão & Precificação</title>
+  <title>Confeitaria ChoCoffee Paixão | Precificação & Estoque</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -14,34 +14,37 @@
 </head>
 <body class="min-h-screen flex flex-col text-sm">
 
-  <!-- Cabeçalho -->
-  <header class="bg-[#26150B] text-[#DBDDD8] border-b border-[#735840]/40 sticky top-0 z-50 px-4 py-3 shadow-md">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-      
-      <!-- Marca / Logo -->
-      <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-full bg-[#f4ebd0] flex items-center justify-center p-0.5 border border-[#A68D77] shadow-sm overflow-hidden flex-shrink-0">
-            <img src="logo.png" alt="Confeitaria ChoCoffee Paixão" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\'fa-solid fa-cookie-bite text-[#26150B] text-lg\'></i>';">
-          </div>
-          <div>
-            <h1 class="font-brand text-lg font-bold text-[#DBDDD8] leading-tight">Confeitaria ChoCoffee Paixão</h1>
-            <span class="text-[10px] text-[#A68D77] font-semibold uppercase tracking-wider block">GESTÃO & PRECIFICAÇÃO</span>
-          </div>
-        </div>
+<!-- OPÇÃO 1: LOGO CENTRALIZADO COM GRANDE DESTAQUE -->
+<header class="bg-[#26150B] text-[#DBDDD8] border-b border-[#735840]/40 sticky top-0 z-50 pt-4 pb-3 px-4 shadow-lg">
+  <div class="max-w-6xl mx-auto flex flex-col items-center gap-3">
+    
+    <!-- Marca Centralizada com Logo Ampliado -->
+    <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+      <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f4ebd0] flex items-center justify-center p-1 border-2 border-[#A68D77] shadow-xl flex-shrink-0 -mb-2 sm:mb-0 transition-transform hover:scale-105">
+        <img src="logo.png" alt="Confeitaria ChoCoffee Paixão" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\'fa-solid fa-cookie-bite text-[#26150B] text-3xl\'></i>';">
       </div>
-
-      <!-- Navegação por Abas -->
-      <nav class="flex space-x-2 w-full sm:w-auto bg-[#1a0e07] p-1 rounded-xl border border-[#735840]/40">
-        <button onclick="switchTab('pricing')" id="nav-pricing" class="flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center">
-          <i class="fa-solid fa-calculator mr-2"></i>Precificação
-        </button>
-        <button onclick="switchTab('stock')" id="nav-stock" class="flex-1 sm:flex-none py-2 px-4 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center">
-          <i class="fa-solid fa-boxes-stacked mr-2"></i>Estoque
-        </button>
-      </nav>
+      <div class="flex flex-col items-center sm:items-start">
+        <h1 class="font-brand text-2xl sm:text-3xl font-extrabold text-[#DBDDD8] tracking-wide leading-tight">
+          Confeitaria ChoCoffee Paixão
+        </h1>
+        <span class="text-xs text-[#A68D77] font-bold uppercase tracking-widest mt-0.5">
+          <i class="fa-solid fa-crown text-[10px] mr-1"></i> Precificação & Estoque
+        </span>
+      </div>
     </div>
-  </header>
+
+    <!-- Navegação por Abas -->
+    <nav class="flex space-x-2 w-full sm:w-auto bg-[#1a0e07] p-1.5 rounded-xl border border-[#735840]/40 mt-1">
+      <button onclick="switchTab('pricing')" id="nav-pricing" class="flex-1 sm:flex-none py-2 px-5 rounded-lg text-xs font-bold transition bg-[#A68D77] text-[#26150B] shadow-sm flex items-center justify-center">
+        <i class="fa-solid fa-calculator mr-2"></i>Precificação
+      </button>
+      <button onclick="switchTab('stock')" id="nav-stock" class="flex-1 sm:flex-none py-2 px-5 rounded-lg text-xs font-bold transition text-[#DBDDD8] hover:bg-white/5 flex items-center justify-center">
+        <i class="fa-solid fa-boxes-stacked mr-2"></i>Estoque
+      </button>
+    </nav>
+
+  </div>
+</header>
 
   <main class="flex-grow max-w-6xl mx-auto w-full p-3 sm:p-6 space-y-6">
 
@@ -51,22 +54,19 @@
       <!-- Banner de Cabeçalho -->
       <div class="bg-white p-5 rounded-2xl border border-[#735840]/20 shadow-sm flex items-center justify-between gap-4">
         <div>
-          <h2 class="font-brand text-2xl font-bold text-[#26150B]">Ficha Técnica & Precificação</h2>
-          <p class="text-xs text-[#735840] mt-0.5">Ajuste seus insumos, monte receitas personalizadas e veja o valor real por unidade.</p>
+          <h2 class="font-brand text-2xl font-bold text-[#26150B]">Precificação & Receitas</h2>
+          <p class="text-xs text-[#735840] mt-0.5">Ajuste seus produtos, monte receitas personalizadas e veja o valor real por unidade.</p>
         </div>
-        <button onclick="resetPricingData()" title="Restaurar Dados Padrão" class="text-xs bg-[#26150B] hover:bg-[#403022] text-[#DBDDD8] p-3 rounded-xl transition font-bold flex items-center justify-center shadow-sm flex-shrink-0">
-          <i class="fa-solid fa-rotate-left"></i>
-        </button>
       </div>
 
-      <!-- SEÇÃO 1: INSUMOS -->
+      <!-- SEÇÃO 1: PRODUTOS -->
       <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
         <div class="p-4 bg-[#26150B] text-[#DBDDD8] flex items-center justify-between">
           <h3 class="font-bold text-sm uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-cart-shopping mr-2.5 text-[#A68D77]"></i> 1. CADASTRO DE INSUMOS
+            <i class="fa-solid fa-cart-shopping mr-2.5 text-[#A68D77]"></i> CADASTRO DE PRODUTOS
           </h3>
           <button onclick="addInsumoRow()" class="text-xs font-bold bg-[#A68D77] hover:bg-white hover:text-[#26150B] text-[#26150B] px-4 py-2 rounded-xl transition shadow-sm border border-[#A68D77]">
-            + Insumo
+            + Produto
           </button>
         </div>
         
@@ -78,15 +78,19 @@
       <!-- SEÇÃO 2: RECEITA -->
       <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
         <div class="p-4 bg-[#26150B] text-[#DBDDD8] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div class="flex items-center space-x-3 w-full sm:w-auto">
-            <i class="fa-solid fa-utensils text-[#A68D77] text-lg"></i>
-            <span class="font-bold text-sm uppercase tracking-wider">2. Ficha Técnica:</span>
-            <select id="recipe-selector" onchange="changeRecipe(this.value)" class="bg-[#1a0e07] text-[#DBDDD8] border border-[#735840]/60 text-xs font-bold py-1.5 px-3 rounded-xl outline-none focus:border-[#A68D77]">
+          
+          <div class="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-utensils text-[#A68D77] text-lg"></i>
+              <span class="font-bold text-sm uppercase tracking-wider">Minhas Receitas:</span>
+            </div>
+            <select id="recipe-selector" onchange="changeRecipe(this.value)" class="bg-[#1a0e07] text-[#DBDDD8] border border-[#735840]/60 text-xs font-bold py-1.5 px-3 rounded-xl outline-none focus:border-[#A68D77] max-w-[180px] sm:max-w-none">
               <!-- Opções renderizadas via JS -->
             </select>
           </div>
 
-          <div class="flex items-center space-x-2">
+          <!-- Botões de ação da receita (alinhados à direita abaixo do seletor em telas pequenas) -->
+          <div class="flex items-center justify-end space-x-2 w-full sm:w-auto">
             <button onclick="createNewRecipe()" class="text-xs font-bold bg-[#A68D77] hover:bg-white text-[#26150B] px-3 py-1.5 rounded-xl transition shadow-sm flex items-center">
               <i class="fa-solid fa-plus mr-1.5"></i> Nova Receita
             </button>
@@ -107,7 +111,7 @@
               + Adicionar
             </button>
           </div>
-          <span class="text-[11px] text-[#735840] italic">Monte ingredientes específicos para cada sabor.</span>
+          <span class="text-[11px] text-[#735840] italic">Junte ingredientes específicos para cada sabor.</span>
         </div>
 
         <div id="recipe-container">
@@ -138,7 +142,7 @@
       <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
         <div class="p-4 bg-[#26150B] text-[#DBDDD8] flex justify-between items-center">
           <h3 class="font-bold text-sm uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-chart-line mr-2.5 text-[#A68D77]"></i> 3. Sugestão de Preço
+            <i class="fa-solid fa-chart-line mr-2.5 text-[#A68D77]"></i> Sugestão de Preço
           </h3>
           <span class="text-xs text-[#A68D77]">Custo Base: <strong id="sim-cost-base" class="text-white">R$ 0,00</strong></span>
         </div>
@@ -156,7 +160,7 @@
       <!-- Cards de Métricas -->
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <div class="bg-white p-4 rounded-2xl border border-[#735840]/20 text-center shadow-sm">
-          <span class="text-xs font-bold text-[#735840] uppercase block">Insumos Cadastrados</span>
+          <span class="text-xs font-bold text-[#735840] uppercase block">Produtos Cadastrados</span>
           <span id="stock-total-items" class="text-2xl font-black text-[#26150B] mt-1 block">0</span>
         </div>
         <div class="bg-white p-4 rounded-2xl border border-[#735840]/20 text-center shadow-sm">
@@ -179,7 +183,7 @@
           <h4 class="font-bold text-base flex items-center text-[#A68D77]">
             <i class="fa-solid fa-kitchen-set mr-2"></i> Produção Rápida de Receita
           </h4>
-          <p class="text-xs text-[#DBDDD8]/80 mt-0.5">Desconta os ingredientes do estoque de insumos e adiciona os produtos prontos no estoque.</p>
+          <p class="text-xs text-[#DBDDD8]/80 mt-0.5">Desconta os ingredientes do estoque e adiciona os produtos prontos no estoque.</p>
         </div>
         
         <div class="flex items-center space-x-2 w-full sm:w-auto">
@@ -195,7 +199,7 @@
       <!-- Lista de Estoque -->
       <div class="bg-white rounded-2xl border border-[#735840]/20 overflow-hidden shadow-sm">
         <div class="p-4 bg-[#26150B] text-[#DBDDD8]">
-          <h3 class="font-bold text-sm uppercase tracking-wider">Estoque Atual de Insumos</h3>
+          <h3 class="font-bold text-sm uppercase tracking-wider">Estoque Atual de Produtos</h3>
         </div>
         <div id="stock-container">
           <!-- JS renderiza aqui -->
@@ -651,7 +655,7 @@
       });
 
       if (missing.length > 0) {
-        if (!confirm(`Atenção: Os seguintes insumos não têm estoque suficiente:\n- ${missing.join('\n- ')}\n\nDeseja abater assim mesmo?`)) {
+        if (!confirm(`Atenção: Os seguintes insumos não têm estoque suficiente para realizar esta receita:\n- ${missing.join('\n- ')}\n\nDeseja abater assim mesmo?`)) {
           return;
         }
       }
@@ -781,15 +785,22 @@
       calculateAll();
     }
 
-    function resetPricingData() {
-      if (confirm('Restaurar os dados padrões de insumos e receitas?')) {
-        insumos = JSON.parse(JSON.stringify(defaultInsumos));
-        recipes = JSON.parse(JSON.stringify(defaultRecipes));
-        currentRecipeId = recipes[0].id;
-        renderInsumos();
-        renderRecipe();
-        calculateAll();
-      }
+    // Calcula a maior necessidade do insumo para fazer 2 receitas
+    function getMaxNeededForTwoRecipes(insumoName) {
+      let maxNeededInOneBatch = 0;
+      recipes.forEach(r => {
+        if (r.ingredients[insumoName] !== undefined) {
+          if (r.ingredients[insumoName] > maxNeededInOneBatch) {
+            maxNeededInOneBatch = r.ingredients[insumoName];
+          }
+        }
+      });
+
+      // Se o insumo não for usado em nenhuma receita, define um valor fixo seguro (ex: 200)
+      if (maxNeededInOneBatch === 0) return 200;
+
+      // Alerta quando o estoque for menor que 2 receitas do item
+      return maxNeededInOneBatch * 2;
     }
 
     function renderStock() {
@@ -812,7 +823,8 @@
       let lowAlerts = 0;
 
       insumos.forEach((item, index) => {
-        const isLow = item.stockCurrent <= 200;
+        const minNeededFor2Recipes = getMaxNeededForTwoRecipes(item.name);
+        const isLow = (item.stockCurrent || 0) < minNeededFor2Recipes;
         if (isLow) lowAlerts++;
 
         const step = item.unit === 'un' ? 1 : 100;
@@ -849,17 +861,20 @@
 
       html += '<div class="md:hidden p-3 space-y-3">';
       insumos.forEach((item, index) => {
-        const isLow = item.stockCurrent <= 200;
+        const minNeededFor2Recipes = getMaxNeededForTwoRecipes(item.name);
+        const isLow = (item.stockCurrent || 0) < minNeededFor2Recipes;
         const step = item.unit === 'un' ? 1 : 100;
 
         html += `
-          <div class="bg-[#fcfdfb] p-3 rounded-xl border border-[#735840]/20 flex flex-col gap-2.5">
+          <div class="bg-[#fcfdfb] p-3 rounded-xl border border-[#735840]/20 flex flex-col gap-2">
             <div class="flex items-center justify-between">
               <span class="font-bold text-xs text-[#26150B]">${item.name}</span>
               ${isLow 
                 ? '<span class="px-2 py-0.5 bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-bold rounded-full">Baixo</span>' 
                 : '<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold rounded-full">OK</span>'}
             </div>
+
+            <div class="border-t border-[#735840]/20 my-0.5"></div>
 
             <div class="flex items-center justify-between space-x-3">
               <div class="flex items-center space-x-1">
@@ -868,9 +883,9 @@
                 <span class="text-[10px] text-[#735840] font-bold">${item.unit}</span>
               </div>
 
-              <div class="flex space-x-1">
-                <button onclick="changeStock(${index}, -${step})" class="px-2.5 py-1 bg-[#26150B] text-[#DBDDD8] text-xs font-bold rounded-lg">-${step}</button>
-                <button onclick="changeStock(${index}, ${step})" class="px-2.5 py-1 bg-[#A68D77] text-[#26150B] text-xs font-bold rounded-lg">+</button>
+              <div class="flex space-x-1.5">
+                <button onclick="changeStock(${index}, -${step})" class="w-8 h-8 flex items-center justify-center bg-[#26150B] text-[#DBDDD8] text-base font-extrabold rounded-lg shadow-sm active:scale-95 transition">-</button>
+                <button onclick="changeStock(${index}, ${step})" class="w-8 h-8 flex items-center justify-center bg-[#A68D77] text-[#26150B] text-base font-extrabold rounded-lg shadow-sm active:scale-95 transition">+</button>
               </div>
             </div>
           </div>
